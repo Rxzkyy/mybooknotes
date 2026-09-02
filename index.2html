@@ -1,51 +1,710 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111111">
-<title>My Book By Rizky</title>
-<link rel="manifest" href="manifest.json">
+
+<title>My Book Notes</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:#f6f6f6;color:#171717}
-header{background:#111;color:white;padding:28px 20px 22px}header h1{margin:0;font-size:28px}header p{margin:6px 0 0;color:#bbb}
-main{max-width:760px;margin:auto;padding:18px}.card{background:white;border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:0 5px 20px #0000000b}
-h2{margin:0 0 14px}label{font-size:13px;font-weight:700;display:block;margin:12px 0 6px}
-input,textarea,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:12px;background:#fafafa;font:inherit}
-textarea{min-height:120px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-button{padding:12px 16px;border:0;border-radius:12px;font-weight:700;cursor:pointer}.add{background:#111;color:#fff}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#f1f1f1;border-radius:14px;padding:13px;text-align:center}.stat b{display:block;font-size:23px}.stat span{font-size:12px;color:#777}
-.book{display:grid;grid-template-columns:90px 1fr;gap:14px;border-top:1px solid #eee;padding:15px 0}.cover{width:90px;height:120px;border-radius:10px;object-fit:cover;background:#eee}.book h3{margin:0 0 4px}.meta{font-size:12px;color:#777}.note{margin-top:8px;white-space:pre-wrap;line-height:1.45;font-size:14px}.delete{margin-top:10px;background:#eee}
-#preview{max-width:130px;max-height:170px;border-radius:10px;margin-top:8px;display:none}
-@media(max-width:600px){.row{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f3ef;
+    color: #222;
+}
+
+header {
+    background: #111;
+    color: white;
+    padding: 25px 18px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 27px;
+}
+
+header p {
+    margin: 7px 0 0;
+    color: #ccc;
+}
+
+main {
+    max-width: 760px;
+    margin: auto;
+    padding: 18px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 13px 0 6px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #fafafa;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 16px;
+    background: #111;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button.secondary {
+    background: #eee;
+    color: #222;
+}
+
+button.delete {
+    background: #d93636;
+    margin-top: 10px;
+}
+
+.preview {
+    width: 120px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: none;
+}
+
+.book {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 15px;
+    border-top: 1px solid #eee;
+    padding: 16px 0;
+}
+
+.book img,
+.no-cover {
+    width: 100px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #eee;
+}
+
+.no-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+}
+
+.book h3 {
+    margin: 0 0 6px;
+}
+
+.meta {
+    color: #777;
+    font-size: 13px;
+}
+
+.note {
+    margin-top: 9px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+    padding: 25px;
+}
+
+@media (max-width: 600px) {
+    .book {
+        grid-template-columns: 80px 1fr;
+    }
+
+    .book img,
+    .no-cover {
+        width: 80px;
+        height: 115px;
+    }
+}
 </style>
 </head>
+
 <body>
-<header><h1>📚 My Book By Rizky</h1><p>Catatan buku yang sudah kamu baca</p></header>
+
+<header>
+    <h1>📚 My Book Notes</h1>
+    <p id="ownerText">by Your Name</p>
+</header>
+
 <main>
+
+<!-- NAMA -->
 <section class="card">
-<div class="stats"><div class="stat"><b id="total">0</b><span>Total</span></div><div class="stat"><b id="done">0</b><span>Selesai</span></div><div class="stat"><b id="reading">0</b><span>Dibaca</span></div></div>
+    <h2>👤 Nama Kamu</h2>
+
+    <label>Nama</label>
+
+    <input
+        id="owner"
+        type="text"
+        placeholder="Contoh: Rizky"
+        maxlength="30"
+    >
+
+    <p>
+        <small>
+            Nama ini akan muncul sebagai "My Book Notes by Nama".
+        </small>
+    </p>
 </section>
+
+
+<!-- TAMBAH BUKU -->
 <section class="card">
-<h2>Tambah Buku</h2>
-<label>Judul buku</label><input id="title" placeholder="Masukkan judul">
-<div class="row"><div><label>Penulis</label><input id="author" placeholder="Nama penulis"></div>
-<div><label>Status</label><select id="status"><option>Sudah dibaca</option><option>Sedang dibaca</option><option>Ingin dibaca</option></select></div></div>
-<label>Rating</label><select id="rating"><option>★★★★★</option><option>★★★★☆</option><option>★★★☆☆</option><option>★★☆☆☆</option><option>★☆☆☆☆</option></select>
-<label>Catatan</label><textarea id="notes" placeholder="Apa yang kamu pelajari dari buku ini?"></textarea>
-<label>Foto sampul</label><input id="photo" type="file" accept="image/*"><img id="preview">
-<br><br><button class="add" onclick="addBook()">+ Simpan Buku</button>
+
+    <h2>📖 Tambah Buku</h2>
+
+    <label>Judul Buku</label>
+
+    <input
+        id="title"
+        type="text"
+        placeholder="Masukkan judul buku"
+    >
+
+
+    <label>Penulis</label>
+
+    <input
+        id="author"
+        type="text"
+        placeholder="Nama penulis"
+    >
+
+
+    <label>Status</label>
+
+    <select id="status">
+
+        <option>Sudah dibaca</option>
+
+        <option>Sedang dibaca</option>
+
+        <option>Ingin dibaca</option>
+
+    </select>
+
+
+    <label>Rating</label>
+
+    <select id="rating">
+
+        <option>⭐⭐⭐⭐⭐</option>
+
+        <option>⭐⭐⭐⭐</option>
+
+        <option>⭐⭐⭐</option>
+
+        <option>⭐⭐</option>
+
+        <option>⭐</option>
+
+    </select>
+
+
+    <label>Foto Sampul Buku</label>
+
+    <input
+        id="cover"
+        type="file"
+        accept="image/*"
+    >
+
+    <img
+        id="preview"
+        class="preview"
+        alt="Preview"
+    >
+
+
+    <label>Catatan Buku</label>
+
+    <textarea
+        id="notes"
+        placeholder="Tulis apa yang kamu pelajari dari buku ini..."
+    ></textarea>
+
+    <br><br>
+
+    <button onclick="addBook()">
+        + Simpan Buku
+    </button>
+
 </section>
-<section class="card"><h2>Koleksi Saya</h2><input id="search" placeholder="🔎 Cari buku..." oninput="render()"><div id="list"></div></section>
+
+
+<!-- KOLEKSI -->
+<section class="card">
+
+    <h2>📚 Koleksi Buku</h2>
+
+    <input
+        id="search"
+        type="text"
+        placeholder="🔎 Cari judul atau penulis..."
+        oninput="renderBooks()"
+    >
+
+    <div id="books"></div>
+
+</section>
+
 </main>
+
+
 <script>
-let books=JSON.parse(localStorage.getItem("myBookByRizky")||"[]"),photo="";
-photoInput=document.getElementById("photo");
-photoInput.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{photo=r.result;preview.src=photo;preview.style.display="block"};r.readAsDataURL(f)};
-function addBook(){let title=document.getElementById("title").value.trim();if(!title)return alert("Judul buku belum diisi.");books.unshift({id:Date.now(),title,author:author.value.trim(),status:status.value,rating:rating.value,notes:notes.value.trim(),photo});localStorage.setItem("myBookByRizky",JSON.stringify(books));["title","author","notes"].forEach(x=>document.getElementById(x).value="");photo="";photoInput.value="";preview.style.display="none";render()}
-function del(id){books=books.filter(x=>x.id!==id);localStorage.setItem("myBookByRizky",JSON.stringify(books));render()}
-function esc(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
-function render(){let q=search.value.toLowerCase(),a=books.filter(x=>(x.title+" "+x.author).toLowerCase().includes(q));total.textContent=books.length;done.textContent=books.filter(x=>x.status==="Sudah dibaca").length;reading.textContent=books.filter(x=>x.status==="Sedang dibaca").length;list.innerHTML=a.length?a.map(x=>`<article class="book">${x.photo?`<img class="cover" src="${x.photo}">`:`<div class="cover"></div>`}<div><h3>${esc(x.title)}</h3><div class="meta">${esc(x.author)||"Penulis tidak diisi"} · ${esc(x.status)}</div><div>${x.rating}</div><div class="note">${esc(x.notes)||"Belum ada catatan."}</div><button class="delete" onclick="del(${x.id})">Hapus</button></div></article>`).join(""):`<p style="text-align:center;color:#888">Belum ada buku.</p>`}
-render();
+
+let books =
+    JSON.parse(
+        localStorage.getItem("myBookNotesBooks") || "[]"
+    );
+
+let owner =
+    localStorage.getItem("myBookNotesOwner") || "";
+
+let selectedImage = "";
+
+
+/* =========================
+   NAMA PEMILIK
+========================= */
+
+const ownerInput =
+    document.getElementById("owner");
+
+const ownerText =
+    document.getElementById("ownerText");
+
+ownerInput.value = owner;
+
+updateOwner();
+
+ownerInput.addEventListener("input", function() {
+
+    owner = ownerInput.value.trim();
+
+    localStorage.setItem(
+        "myBookNotesOwner",
+        owner
+    );
+
+    updateOwner();
+
+});
+
+
+function updateOwner() {
+
+    if (owner) {
+
+        ownerText.textContent =
+            "by " + owner;
+
+    } else {
+
+        ownerText.textContent =
+            "by Your Name";
+
+    }
+
+}
+
+
+/* =========================
+   FOTO
+========================= */
+
+document
+.getElementById("cover")
+.addEventListener("change", function(event) {
+
+    const file =
+        event.target.files[0];
+
+    if (!file) return;
+
+    const reader =
+        new FileReader();
+
+    reader.onload = function() {
+
+        selectedImage =
+            reader.result;
+
+        const preview =
+            document.getElementById("preview");
+
+        preview.src =
+            selectedImage;
+
+        preview.style.display =
+            "block";
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* =========================
+   TAMBAH BUKU
+========================= */
+
+function addBook() {
+
+    const title =
+        document
+        .getElementById("title")
+        .value
+        .trim();
+
+    const author =
+        document
+        .getElementById("author")
+        .value
+        .trim();
+
+    const status =
+        document
+        .getElementById("status")
+        .value;
+
+    const rating =
+        document
+        .getElementById("rating")
+        .value;
+
+    const notes =
+        document
+        .getElementById("notes")
+        .value
+        .trim();
+
+
+    if (!title) {
+
+        alert(
+            "Masukkan judul buku terlebih dahulu."
+        );
+
+        return;
+
+    }
+
+
+    const book = {
+
+        id: Date.now(),
+
+        title: title,
+
+        author: author,
+
+        status: status,
+
+        rating: rating,
+
+        notes: notes,
+
+        image: selectedImage
+
+    };
+
+
+    books.unshift(book);
+
+
+    localStorage.setItem(
+        "myBookNotesBooks",
+        JSON.stringify(books)
+    );
+
+
+    document
+    .getElementById("title")
+    .value = "";
+
+    document
+    .getElementById("author")
+    .value = "";
+
+    document
+    .getElementById("notes")
+    .value = "";
+
+    document
+    .getElementById("cover")
+    .value = "";
+
+
+    selectedImage = "";
+
+
+    document
+    .getElementById("preview")
+    .style.display = "none";
+
+
+    renderBooks();
+
+}
+
+
+/* =========================
+   HAPUS BUKU
+========================= */
+
+function deleteBook(id) {
+
+    const yakin =
+        confirm(
+            "Yakin ingin menghapus buku ini?"
+        );
+
+    if (!yakin) return;
+
+
+    books =
+        books.filter(
+            function(book) {
+
+                return book.id !== id;
+
+            }
+        );
+
+
+    localStorage.setItem(
+        "myBookNotesBooks",
+        JSON.stringify(books)
+    );
+
+
+    renderBooks();
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(text) {
+
+    return String(text || "")
+    .replace(
+        /[&<>"']/g,
+        function(character) {
+
+            return {
+
+                "&": "&amp;",
+
+                "<": "&lt;",
+
+                ">": "&gt;",
+
+                '"': "&quot;",
+
+                "'": "&#039;"
+
+            }[character];
+
+        }
+    );
+
+}
+
+
+/* =========================
+   TAMPILKAN BUKU
+========================= */
+
+function renderBooks() {
+
+    const container =
+        document.getElementById("books");
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+
+    const filtered =
+        books.filter(
+            function(book) {
+
+                return (
+
+                    book.title
+                    .toLowerCase()
+                    .includes(search)
+
+                    ||
+
+                    book.author
+                    .toLowerCase()
+                    .includes(search)
+
+                );
+
+            }
+        );
+
+
+    if (filtered.length === 0) {
+
+        container.innerHTML =
+            `
+            <div class="empty">
+                Belum ada buku 📚
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        filtered
+        .map(
+            function(book) {
+
+                const cover =
+                    book.image
+
+                    ?
+
+                    `
+                    <img
+                        src="${book.image}"
+                        alt="Sampul buku"
+                    >
+                    `
+
+                    :
+
+                    `
+                    <div class="no-cover">
+                        📕
+                    </div>
+                    `;
+
+
+                return `
+
+                <article class="book">
+
+                    ${cover}
+
+                    <div>
+
+                        <h3>
+                            ${escapeHTML(book.title)}
+                        </h3>
+
+                        <div class="meta">
+
+                            ${escapeHTML(
+                                book.author ||
+                                "Penulis tidak diisi"
+                            )}
+
+                            ·
+
+                            ${escapeHTML(book.status)}
+
+                        </div>
+
+                        <div>
+                            ${book.rating}
+                        </div>
+
+                        <div class="note">
+
+                            ${escapeHTML(
+                                book.notes ||
+                                "Tidak ada catatan."
+                            )}
+
+                        </div>
+
+                        <button
+                            class="delete"
+                            onclick="deleteBook(${book.id})"
+                        >
+                            Hapus
+                        </button>
+
+                    </div>
+
+                </article>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================
+   JALANKAN
+========================= */
+
+renderBooks();
+
 </script>
-</body></html>
+
+</body>
+</html>
