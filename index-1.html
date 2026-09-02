@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Book Notes</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f7f5fb;color:#211b2d}
+header{background:linear-gradient(135deg,#6f4bb3,#a986df);color:#fff;padding:55px 20px;text-align:center}
+header h1{font-size:clamp(30px,7vw,56px);margin:0 0 10px;letter-spacing:-1.5px}
+header p{margin:0;opacity:.9}
+.container{max-width:1050px;width:92%;margin:32px auto 60px}
+.toolbar{background:#fff;border:1px solid #e8e0f3;border-radius:20px;padding:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;box-shadow:0 8px 25px #4b2d7010}
+input{flex:1;min-width:190px;border:1px solid #ddd3eb;border-radius:12px;padding:13px 15px;font-size:16px;outline:none}
+input:focus{border-color:#8c68c8}
+button{border:0;border-radius:12px;padding:13px 20px;background:#8058bd;color:white;font-weight:700;font-size:15px;cursor:pointer}
+button:hover{opacity:.9}
+.status{font-size:13px;color:#766b83;width:100%}
+.welcome{margin:25px 0 18px}
+.welcome h2{margin:0 0 6px;font-size:26px}.welcome p{margin:0;color:#70677a}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:#fff;border:1px solid #e8e0f3;border-radius:20px;padding:22px;transition:.2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px #4b2d7012}
+.icon{font-size:30px;margin-bottom:15px}.card h3{margin:0 0 8px}.card p{margin:0;color:#746b80;line-height:1.55}
+footer{text-align:center;padding:25px;color:#81778d;font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="title">My Book Notes By [Nama]</h1>
+  <p>Tempat menyimpan ringkasan, insight, dan pelajaran dari buku.</p>
+</header>
+
+<main class="container">
+  <section class="toolbar">
+    <input id="nameInput" type="text" maxlength="40" placeholder="Masukkan nama, contoh: Andi">
+    <button id="changeBtn" type="button">Ganti Nama</button>
+    <div class="status">Nama juga bisa diatur langsung dari link: <b>?name=Andi</b></div>
+  </section>
+
+  <section class="welcome">
+    <h2>📚 Koleksi Book Notes</h2>
+    <p>Catat hal-hal penting dari buku yang kamu baca.</p>
+  </section>
+
+  <section class="grid">
+    <article class="card"><div class="icon">📖</div><h3>Book Notes 01</h3><p>Tambahkan judul buku, ringkasan, dan pelajaran penting.</p></article>
+    <article class="card"><div class="icon">💡</div><h3>Book Notes 02</h3><p>Simpan insight dan ide yang ingin kamu ingat.</p></article>
+    <article class="card"><div class="icon">📝</div><h3>Book Notes 03</h3><p>Tulis rangkuman singkat setelah selesai membaca.</p></article>
+    <article class="card"><div class="icon">🚀</div><h3>Book Notes 04</h3><p>Dokumentasikan perkembangan dan pelajaran baru.</p></article>
+  </section>
+</main>
+
+<footer id="footer">© 2026 My Book Notes</footer>
+
+<script>
+(function(){
+  const title=document.getElementById("title");
+  const input=document.getElementById("nameInput");
+  const button=document.getElementById("changeBtn");
+  const footer=document.getElementById("footer");
+
+  function clean(value){
+    return value.trim().replace(/[<>]/g,"").slice(0,40);
+  }
+
+  function setName(value){
+    const name=clean(value);
+    const display=name || "[Nama]";
+    title.textContent="My Book Notes By "+display;
+    footer.textContent="© 2026 My Book Notes By "+display;
+    document.title="My Book Notes By "+display;
+
+    if(name){
+      const url=new URL(window.location.href);
+      url.searchParams.set("name",name);
+      window.history.replaceState({}, "", url);
+    }
+  }
+
+  const params=new URLSearchParams(window.location.search);
+  const urlName=clean(params.get("name") || "");
+  if(urlName){ input.value=urlName; setName(urlName); }
+
+  button.addEventListener("click",()=>setName(input.value));
+  input.addEventListener("keydown",e=>{if(e.key==="Enter") setName(input.value)});
+})();
+</script>
+</body>
+</html>
