@@ -161,6 +161,55 @@ button.delete {
         height: 115px;
     }
 }
+    /* =========================
+   PILIHAN TEMA
+========================= */
+
+.theme-button {
+    margin-bottom: 18px;
+}
+
+.theme-gallery {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.theme-gallery.show {
+    display: grid;
+}
+
+.theme-item {
+    height: 100px;
+    border-radius: 14px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    border: 3px solid transparent;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: flex-end;
+    padding: 8px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 1px 4px black;
+}
+
+.theme-item:hover {
+    transform: scale(1.02);
+}
+
+.theme-item.active {
+    border-color: white;
+    box-shadow: 0 0 0 3px #111;
+}
+
+@media (max-width: 600px) {
+    .theme-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 </style>
 </head>
 
@@ -172,7 +221,161 @@ button.delete {
 </header>
 
 <main>
+<!-- PILIH TEMA -->
+<section class="card">
+    <h2>🎨 Pilih Tema</h2>
 
+    <button
+        class="theme-button"
+        onclick="toggleThemes()"
+    >
+        🎨 Ganti Background
+    </button>
+
+    <div id="themeGallery" class="theme-gallery">
+
+        <div class="theme-item"
+             data-theme="1"
+             style="background: linear-gradient(135deg,#0f172a,#312e81);"
+             onclick="setTheme(1)">
+            🌌 Midnight
+        </div>
+
+        <div class="theme-item"
+             data-theme="2"
+             style="background: linear-gradient(135deg,#3b2418,#a87548);"
+             onclick="setTheme(2)">
+            📚 Cozy Library
+        </div>
+
+        <div class="theme-item"
+             data-theme="3"
+             style="background: linear-gradient(135deg,#f5ead7,#d8c3a5);"
+             onclick="setTheme(3)">
+            📜 Paper
+        </div>
+
+        <div class="theme-item"
+             data-theme="4"
+             style="background: linear-gradient(135deg,#3f5f4a,#a8c3a0);"
+             onclick="setTheme(4)">
+            🌿 Nature
+        </div>
+
+        <div class="theme-item"
+             data-theme="5"
+             style="background: linear-gradient(135deg,#f7b6c8,#f8dce5);"
+             onclick="setTheme(5)">
+            🌸 Sakura
+        </div>
+
+        <div class="theme-item"
+             data-theme="6"
+             style="background: linear-gradient(135deg,#6d5cae,#c9b8ff);"
+             onclick="setTheme(6)">
+            💜 Lavender
+        </div>
+
+        <div class="theme-item"
+             data-theme="7"
+             style="background: linear-gradient(135deg,#075985,#38bdf8);"
+             onclick="setTheme(7)">
+            🌊 Ocean
+        </div>
+
+        <div class="theme-item"
+             data-theme="8"
+             style="background: linear-gradient(135deg,#ff9966,#ff5e62);"
+             onclick="setTheme(8)">
+            🌅 Sunset
+        </div>
+
+        <div class="theme-item"
+             data-theme="9"
+             style="background: linear-gradient(135deg,#374151,#9ca3af);"
+             onclick="setTheme(9)">
+            🌧️ Rainy
+        </div>
+
+        <div class="theme-item"
+             data-theme="10"
+             style="background: linear-gradient(135deg,#111,#444);"
+             onclick="setTheme(10)">
+            🖤 Dark
+        </div>
+
+        <div class="theme-item"
+             data-theme="11"
+             style="background: linear-gradient(135deg,#4b2e20,#c08b63);"
+             onclick="setTheme(11)">
+            ☕ Coffee
+        </div>
+
+        <div class="theme-item"
+             data-theme="12"
+             style="background: linear-gradient(135deg,#d6b98c,#f1dfbd);"
+             onclick="setTheme(12)">
+            📖 Vintage
+        </div>
+
+        <div class="theme-item"
+             data-theme="13"
+             style="background: linear-gradient(135deg,#60a5fa,#dbeafe);"
+             onclick="setTheme(13)">
+            ☁️ Cloudy
+        </div>
+
+        <div class="theme-item"
+             data-theme="14"
+             style="background: linear-gradient(135deg,#14532d,#4ade80);"
+             onclick="setTheme(14)">
+            🌲 Forest
+        </div>
+
+        <div class="theme-item"
+             data-theme="15"
+             style="background: linear-gradient(135deg,#111827,#6366f1);"
+             onclick="setTheme(15)">
+            🌙 Moonlight
+        </div>
+
+        <div class="theme-item"
+             data-theme="16"
+             style="background: linear-gradient(135deg,#e7dfd3,#faf7f2);"
+             onclick="setTheme(16)">
+            🤍 Beige
+        </div>
+
+        <div class="theme-item"
+             data-theme="17"
+             style="background: linear-gradient(135deg,#312e81,#a855f7);"
+             onclick="setTheme(17)">
+            ✨ Celestial
+        </div>
+
+        <div class="theme-item"
+             data-theme="18"
+             style="background: linear-gradient(135deg,#78350f,#d97706);"
+             onclick="setTheme(18)">
+            🍂 Autumn
+        </div>
+
+        <div class="theme-item"
+             data-theme="19"
+             style="background: linear-gradient(135deg,#93c5fd,#f9a8d4);"
+             onclick="setTheme(19)">
+            🩵 Pastel
+        </div>
+
+        <div class="theme-item"
+             data-theme="20"
+             style="background: linear-gradient(135deg,#111,#525252);"
+             onclick="setTheme(20)">
+            🪨 Black Marble
+        </div>
+
+    </div>
+</section>
 <!-- NAMA -->
 <section class="card">
     <h2>👤 Nama Kamu</h2>
@@ -703,7 +906,71 @@ function renderBooks() {
 ========================= */
 
 renderBooks();
+/* =========================
+   SISTEM TEMA
+========================= */
 
+const themes = {
+    1: "linear-gradient(135deg,#0f172a,#312e81)",
+    2: "linear-gradient(135deg,#3b2418,#a87548)",
+    3: "linear-gradient(135deg,#f5ead7,#d8c3a5)",
+    4: "linear-gradient(135deg,#3f5f4a,#a8c3a0)",
+    5: "linear-gradient(135deg,#f7b6c8,#f8dce5)",
+    6: "linear-gradient(135deg,#6d5cae,#c9b8ff)",
+    7: "linear-gradient(135deg,#075985,#38bdf8)",
+    8: "linear-gradient(135deg,#ff9966,#ff5e62)",
+    9: "linear-gradient(135deg,#374151,#9ca3af)",
+    10: "linear-gradient(135deg,#111,#444)",
+    11: "linear-gradient(135deg,#4b2e20,#c08b63)",
+    12: "linear-gradient(135deg,#d6b98c,#f1dfbd)",
+    13: "linear-gradient(135deg,#60a5fa,#dbeafe)",
+    14: "linear-gradient(135deg,#14532d,#4ade80)",
+    15: "linear-gradient(135deg,#111827,#6366f1)",
+    16: "linear-gradient(135deg,#e7dfd3,#faf7f2)",
+    17: "linear-gradient(135deg,#312e81,#a855f7)",
+    18: "linear-gradient(135deg,#78350f,#d97706)",
+    19: "linear-gradient(135deg,#93c5fd,#f9a8d4)",
+    20: "linear-gradient(135deg,#111,#525252)"
+};
+
+function toggleThemes() {
+    document
+        .getElementById("themeGallery")
+        .classList.toggle("show");
+}
+
+function setTheme(id) {
+
+    document.body.style.background = themes[id];
+
+    document.body.style.backgroundAttachment = "fixed";
+
+    localStorage.setItem(
+        "myBookNotesTheme",
+        id
+    );
+
+    document.querySelectorAll(".theme-item")
+        .forEach(function(item) {
+            item.classList.remove("active");
+        });
+
+    const selected =
+        document.querySelector(
+            '.theme-item[data-theme="' + id + '"]'
+        );
+
+    if (selected) {
+        selected.classList.add("active");
+    }
+}
+
+const savedTheme =
+    localStorage.getItem("myBookNotesTheme");
+
+if (savedTheme && themes[savedTheme]) {
+    setTheme(savedTheme);
+}
 </script>
 
 </body>
