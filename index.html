@@ -3,331 +3,458 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>My Book Notes</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+min-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+color:#222;
+background:
+linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),
+url("backgrounds/bg01.jpg") center/cover fixed no-repeat;
+transition:.4s;
 }
 
-html {
-    scroll-behavior: smooth;
+body.dark{
+color:#eee;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #222;
-    background:
-        linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.18)),
-        url("backgrounds/bg01.jpg") center/cover fixed no-repeat;
-    transition: background-image .5s ease;
+body.dark header,
+body.dark .section,
+body.dark .card,
+body.dark .modal-box{
+background:rgba(20,20,25,.78);
+color:#eee;
 }
 
-/* OVERLAY */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(255,255,255,.08);
-    pointer-events: none;
-    z-index: -1;
+body.dark input,
+body.dark textarea,
+body.dark select{
+background:rgba(30,30,35,.8);
+color:#fff;
+border-color:#555;
 }
 
-/* HEADER */
-header {
-    padding: 35px 20px;
-    text-align: center;
-    background: rgba(255,255,255,.78);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0,0,0,.12);
+header{
+padding:35px 20px;
+text-align:center;
+background:rgba(255,255,255,.78);
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+box-shadow:0 4px 20px rgba(0,0,0,.12);
 }
 
-header h1 {
-    margin: 0;
-    font-size: 32px;
+header h1{
+margin:0;
+font-size:32px;
 }
 
-header p {
-    margin: 8px 0 0;
-    opacity: .7;
+header p{
+margin:8px 0 0;
+opacity:.7;
 }
 
-/* MAIN */
-main {
-    width: 92%;
-    max-width: 1000px;
-    margin: 30px auto 60px;
+main{
+width:92%;
+max-width:1050px;
+margin:30px auto 60px;
 }
 
-/* SECTION */
-.section {
-    background: rgba(255,255,255,.78);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-radius: 22px;
-    padding: 22px;
-    margin-bottom: 25px;
-    box-shadow: 0 8px 30px rgba(0,0,0,.14);
+.section{
+background:rgba(255,255,255,.78);
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+border-radius:22px;
+padding:22px;
+margin-bottom:25px;
+box-shadow:0 8px 30px rgba(0,0,0,.14);
 }
 
-.section h2 {
-    margin-top: 0;
+.section h2{
+margin-top:0;
 }
 
-/* NAME */
-.name-box {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+.name-box{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
 }
 
-.name-box input {
-    flex: 1;
-    min-width: 180px;
+.name-box input{
+flex:1;
+min-width:180px;
 }
 
-/* INPUT */
-input,
-textarea,
-select {
-    width: 100%;
-    padding: 13px 15px;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: 12px;
-    font-size: 15px;
-    outline: none;
-    background: rgba(255,255,255,.8);
+input,textarea,select{
+width:100%;
+padding:13px 15px;
+border:1px solid rgba(0,0,0,.15);
+border-radius:12px;
+font-size:15px;
+outline:none;
+background:rgba(255,255,255,.85);
 }
 
-textarea {
-    min-height: 100px;
-    resize: vertical;
+textarea{
+min-height:110px;
+resize:vertical;
 }
 
-input:focus,
-textarea:focus {
-    border-color: #777;
+.form-group{
+margin-bottom:15px;
 }
 
-/* BUTTON */
-button {
-    border: none;
-    border-radius: 12px;
-    padding: 12px 18px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
-    transition: .2s;
+.form-group label{
+display:block;
+margin-bottom:7px;
+font-weight:bold;
 }
 
-button:hover {
-    transform: translateY(-1px);
-    opacity: .9;
+button{
+border:none;
+border-radius:12px;
+padding:12px 17px;
+cursor:pointer;
+font-weight:bold;
+font-size:14px;
+transition:.2s;
 }
 
-.primary-btn {
-    background: #222;
-    color: white;
+button:hover{
+transform:translateY(-2px);
+opacity:.9;
 }
 
-.delete-btn {
-    background: #e74c3c;
-    color: white;
+.primary-btn{
+background:#222;
+color:white;
 }
 
-/* FORM */
-.form-group {
-    margin-bottom: 15px;
+.delete-btn{
+background:#e74c3c;
+color:white;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 7px;
-    font-weight: bold;
+.edit-btn{
+background:#777;
+color:white;
 }
 
-/* BOOK GRID */
-.book-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 20px;
+.blue-btn{
+background:#2878d0;
+color:white;
 }
 
-/* BOOK CARD */
-.card {
-    overflow: hidden;
-    border-radius: 20px;
-    background: rgba(255,255,255,.70);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255,255,255,.55);
-    box-shadow: 0 8px 25px rgba(0,0,0,.16);
-    transition: .25s;
+.green-btn{
+background:#29965c;
+color:white;
 }
 
-.card:hover {
-    transform: translateY(-5px);
+.theme-button{
+margin-bottom:15px;
 }
 
-.card-cover {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    display: block;
-    background: #ddd;
+.theme-gallery{
+display:none;
+grid-template-columns:repeat(2,1fr);
+gap:13px;
+margin-top:15px;
 }
 
-.card-content {
-    padding: 17px;
+.theme-gallery.show{
+display:grid;
 }
 
-.card-title {
-    font-size: 19px;
-    font-weight: bold;
-    margin-bottom: 7px;
+.theme-item{
+height:120px;
+border-radius:16px;
+background-size:cover;
+background-position:center;
+cursor:pointer;
+position:relative;
+overflow:hidden;
+border:3px solid transparent;
+box-shadow:0 5px 15px rgba(0,0,0,.18);
+transition:.2s;
 }
 
-.card-author {
-    font-size: 14px;
-    opacity: .7;
-    margin-bottom: 12px;
+.theme-item::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(transparent 40%,rgba(0,0,0,.75));
 }
 
-.card-note {
-    font-size: 14px;
-    line-height: 1.6;
-    white-space: pre-wrap;
+.theme-item span{
+position:absolute;
+z-index:2;
+bottom:10px;
+left:12px;
+color:white;
+font-weight:bold;
+text-shadow:0 2px 5px black;
 }
 
-.card-footer {
-    margin-top: 15px;
+.theme-item:hover{
+transform:scale(1.02);
 }
 
-/* THEME */
-.theme-button {
-    margin-bottom: 15px;
+.theme-item.active{
+border-color:white;
+box-shadow:0 0 0 3px #222;
 }
 
-.theme-gallery {
-    display: none;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 13px;
-    margin-top: 15px;
+.tools{
+display:grid;
+grid-template-columns:1fr 180px;
+gap:10px;
+margin-bottom:20px;
 }
 
-.theme-gallery.show {
-    display: grid;
+.book-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+gap:20px;
 }
 
-.theme-item {
-    height: 120px;
-    border-radius: 16px;
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    border: 3px solid transparent;
-    box-shadow: 0 5px 15px rgba(0,0,0,.18);
-    transition: .2s;
+.card{
+overflow:hidden;
+border-radius:20px;
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(15px);
+-webkit-backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.55);
+box-shadow:0 8px 25px rgba(0,0,0,.16);
+transition:.25s;
 }
 
-.theme-item::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        transparent 40%,
-        rgba(0,0,0,.7)
-    );
+.card:hover{
+transform:translateY(-5px);
 }
 
-.theme-item span {
-    position: absolute;
-    z-index: 2;
-    bottom: 10px;
-    left: 12px;
-    color: white;
-    font-weight: bold;
-    text-shadow: 0 2px 5px black;
+.card-cover{
+width:100%;
+height:280px;
+object-fit:cover;
+display:block;
+background:#ddd;
 }
 
-.theme-item:hover {
-    transform: scale(1.02);
+.card-content{
+padding:17px;
 }
 
-.theme-item.active {
-    border-color: white;
-    box-shadow:
-        0 0 0 3px #222,
-        0 5px 15px rgba(0,0,0,.25);
+.card-title{
+font-size:19px;
+font-weight:bold;
+margin-bottom:7px;
 }
 
-/* EMPTY */
-.empty {
-    text-align: center;
-    padding: 30px;
-    opacity: .65;
+.card-author{
+font-size:14px;
+opacity:.7;
+margin-bottom:8px;
 }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    color: white;
-    padding: 25px;
-    text-shadow: 0 2px 5px rgba(0,0,0,.7);
+.genre{
+display:inline-block;
+font-size:12px;
+padding:5px 9px;
+border-radius:20px;
+background:rgba(0,0,0,.1);
+margin-bottom:9px;
 }
 
-/* MOBILE */
-@media (max-width: 600px) {
+.rating{
+margin-bottom:10px;
+letter-spacing:1px;
+}
 
-    header h1 {
-        font-size: 26px;
-    }
+.card-note{
+font-size:14px;
+line-height:1.6;
+display:-webkit-box;
+-webkit-line-clamp:4;
+-webkit-box-orient:vertical;
+overflow:hidden;
+}
 
-    main {
-        width: 94%;
-        margin-top: 20px;
-    }
+.card-footer{
+display:flex;
+gap:7px;
+margin-top:15px;
+flex-wrap:wrap;
+}
 
-    .section {
-        padding: 17px;
-        border-radius: 18px;
-    }
+.empty{
+text-align:center;
+padding:35px;
+opacity:.65;
+grid-column:1/-1;
+}
 
-    .book-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+}
 
-    .card-cover {
-        height: 220px;
-    }
+.stat{
+padding:18px;
+border-radius:17px;
+background:rgba(255,255,255,.35);
+text-align:center;
+}
 
-    .card-content {
-        padding: 12px;
-    }
+.stat-number{
+font-size:27px;
+font-weight:bold;
+margin-bottom:5px;
+}
 
-    .card-title {
-        font-size: 16px;
-    }
+.stat-label{
+font-size:13px;
+opacity:.7;
+}
 
-    .card-author,
-    .card-note {
-        font-size: 12px;
-    }
+.backup-buttons{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
 
-    .theme-gallery {
-        grid-template-columns: 1fr 1fr;
-    }
+footer{
+text-align:center;
+color:white;
+padding:25px;
+text-shadow:0 2px 5px rgba(0,0,0,.7);
+}
 
-    .theme-item {
-        height: 95px;
-    }
+.modal{
+display:none;
+position:fixed;
+z-index:100;
+inset:0;
+background:rgba(0,0,0,.65);
+padding:20px;
+align-items:center;
+justify-content:center;
+}
+
+.modal.show{
+display:flex;
+}
+
+.modal-box{
+width:100%;
+max-width:600px;
+max-height:90vh;
+overflow:auto;
+background:rgba(255,255,255,.96);
+border-radius:22px;
+padding:22px;
+position:relative;
+}
+
+.modal-close{
+position:absolute;
+right:15px;
+top:12px;
+font-size:24px;
+background:none;
+}
+
+.detail-cover{
+width:100%;
+max-height:400px;
+object-fit:contain;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+.detail-note{
+line-height:1.7;
+white-space:pre-wrap;
+}
+
+@media(max-width:600px){
+
+header h1{
+font-size:26px;
+}
+
+main{
+width:94%;
+margin-top:20px;
+}
+
+.section{
+padding:17px;
+border-radius:18px;
+}
+
+.book-grid{
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.card-cover{
+height:220px;
+}
+
+.card-content{
+padding:12px;
+}
+
+.card-title{
+font-size:16px;
+}
+
+.card-author,
+.card-note{
+font-size:12px;
+}
+
+.theme-gallery{
+grid-template-columns:1fr 1fr;
+}
+
+.theme-item{
+height:95px;
+}
+
+.tools{
+grid-template-columns:1fr;
+}
+
+.stats{
+grid-template-columns:1fr 1fr 1fr;
+gap:7px;
+}
+
+.stat{
+padding:12px 5px;
+}
+
+.stat-number{
+font-size:20px;
+}
+
+.stat-label{
+font-size:10px;
+}
+
+.card-footer button{
+padding:9px 10px;
+font-size:11px;
+}
+
 }
 </style>
 </head>
@@ -335,747 +462,1025 @@ footer {
 <body>
 
 <header>
-    <h1>📚 My Book Notes</h1>
-    <p>Catatan buku yang pernah kamu baca</p>
+<h1>📚 My Book Notes</h1>
+<p id="headerSubtitle">Catatan buku yang pernah kamu baca</p>
 </header>
 
 <main>
 
-    <!-- NAMA -->
-    <section class="section">
-        <h2>👤 Nama Kamu</h2>
+<section class="section">
+<h2>👤 Nama Kamu</h2>
 
-        <div class="name-box">
-            <input
-                type="text"
-                id="ownerName"
-                placeholder="Masukkan nama kamu..."
-            >
+<div class="name-box">
+<input id="ownerName" type="text" placeholder="Masukkan nama kamu...">
+<button class="primary-btn" onclick="saveName()">Simpan</button>
+</div>
 
-            <button
-                class="primary-btn"
-                onclick="saveName()">
-                Simpan
-            </button>
-        </div>
-
-        <p id="welcomeText"></p>
-    </section>
+<p id="welcomeText"></p>
+</section>
 
 
-    <!-- THEME -->
-    <section class="section">
+<section class="section">
 
-        <h2>🎨 Pilih Tema</h2>
+<h2>🎨 Pilih Tema</h2>
 
-        <button
-            class="primary-btn theme-button"
-            onclick="toggleThemes()">
-            🌈 Pilih Background
-        </button>
+<button class="primary-btn theme-button" onclick="toggleThemes()">
+🌈 Pilih Background
+</button>
 
-        <div
-            class="theme-gallery"
-            id="themeGallery">
+<button class="blue-btn theme-button" onclick="toggleDarkMode()">
+🌙 Dark Mode
+</button>
 
-            <!-- ANIME 1 -->
-            <div
-                class="theme-item"
-                data-theme="1"
-                style="background-image:url('backgrounds/bg01.jpg')"
-                onclick="setTheme(1)">
-                <span>🌃 Anime Night</span>
-            </div>
+<div class="theme-gallery" id="themeGallery">
 
-            <!-- ANIME 2 -->
-            <div
-                class="theme-item"
-                data-theme="2"
-                style="background-image:url('backgrounds/bg02.jpg')"
-                onclick="setTheme(2)">
-                <span>🌸 Anime Sakura</span>
-            </div>
+<div class="theme-item" data-theme="1" style="background-image:url('backgrounds/bg01.jpg')" onclick="setTheme(1)">
+<span>🌃 Anime Night</span>
+</div>
 
-            <!-- ANIME 3 -->
-            <div
-                class="theme-item"
-                data-theme="3"
-                style="background-image:url('backgrounds/bg03.jpg')"
-                onclick="setTheme(3)">
-                <span>🌧️ Anime Rain</span>
-            </div>
+<div class="theme-item" data-theme="2" style="background-image:url('backgrounds/bg02.jpg')" onclick="setTheme(2)">
+<span>🌸 Anime Sakura</span>
+</div>
 
-            <!-- ANIME 4 -->
-            <div
-                class="theme-item"
-                data-theme="4"
-                style="background-image:url('backgrounds/bg04.jpg')"
-                onclick="setTheme(4)">
-                <span>🏙️ Anime City</span>
-            </div>
+<div class="theme-item" data-theme="3" style="background-image:url('backgrounds/bg03.jpg')" onclick="setTheme(3)">
+<span>🌧️ Anime Rain</span>
+</div>
 
-            <!-- ANIME 5 -->
-            <div
-                class="theme-item"
-                data-theme="5"
-                style="background-image:url('backgrounds/bg05.jpg')"
-                onclick="setTheme(5)">
-                <span>🌌 Anime Sky</span>
-            </div>
+<div class="theme-item" data-theme="4" style="background-image:url('backgrounds/bg04.jpg')" onclick="setTheme(4)">
+<span>🏙️ Anime City</span>
+</div>
 
-            <!-- ANIME 6 -->
-            <div
-                class="theme-item"
-                data-theme="6"
-                style="background-image:url('backgrounds/bg06.jpg')"
-                onclick="setTheme(6)">
-                <span>🌙 Anime Moon</span>
-            </div>
+<div class="theme-item" data-theme="5" style="background-image:url('backgrounds/bg05.jpg')" onclick="setTheme(5)">
+<span>🌌 Anime Sky</span>
+</div>
 
-            <!-- ANIME 7 -->
-            <div
-                class="theme-item"
-                data-theme="7"
-                style="background-image:url('backgrounds/bg07.jpg')"
-                onclick="setTheme(7)">
-                <span>🌆 Anime Sunset</span>
-            </div>
+<div class="theme-item" data-theme="6" style="background-image:url('backgrounds/bg06.jpg')" onclick="setTheme(6)">
+<span>🌙 Anime Moon</span>
+</div>
 
-            <!-- ANIME 8 -->
-            <div
-                class="theme-item"
-                data-theme="8"
-                style="background-image:url('backgrounds/bg08.jpg')"
-                onclick="setTheme(8)">
-                <span>☁️ Anime Cloud</span>
-            </div>
+<div class="theme-item" data-theme="7" style="background-image:url('backgrounds/bg07.jpg')" onclick="setTheme(7)">
+<span>🌆 Anime Sunset</span>
+</div>
 
-            <!-- ANIME 9 -->
-            <div
-                class="theme-item"
-                data-theme="9"
-                style="background-image:url('backgrounds/bg09.jpg')"
-                onclick="setTheme(9)">
-                <span>🚉 Anime Station</span>
-            </div>
+<div class="theme-item" data-theme="8" style="background-image:url('backgrounds/bg08.jpg')" onclick="setTheme(8)">
+<span>☁️ Anime Cloud</span>
+</div>
 
-            <!-- ANIME 10 -->
-            <div
-                class="theme-item"
-                data-theme="10"
-                style="background-image:url('backgrounds/bg10.jpg')"
-                onclick="setTheme(10)">
-                <span>💜 Anime Purple</span>
-            </div>
+<div class="theme-item" data-theme="9" style="background-image:url('backgrounds/bg09.jpg')" onclick="setTheme(9)">
+<span>🚉 Anime Station</span>
+</div>
+
+<div class="theme-item" data-theme="10" style="background-image:url('backgrounds/bg10.jpg')" onclick="setTheme(10)">
+<span>💜 Anime Purple</span>
+</div>
+
+<div class="theme-item" data-theme="11" style="background-image:url('backgrounds/bg11.jpg')" onclick="setTheme(11)">
+<span>🌷 Pink Flowers</span>
+</div>
+
+<div class="theme-item" data-theme="12" style="background-image:url('backgrounds/bg12.jpg')" onclick="setTheme(12)">
+<span>🌸 Sakura Flowers</span>
+</div>
+
+<div class="theme-item" data-theme="13" style="background-image:url('backgrounds/bg13.jpg')" onclick="setTheme(13)">
+<span>💜 Lavender</span>
+</div>
+
+<div class="theme-item" data-theme="14" style="background-image:url('backgrounds/bg14.jpg')" onclick="setTheme(14)">
+<span>🌺 Soft Flowers</span>
+</div>
+
+<div class="theme-item" data-theme="15" style="background-image:url('backgrounds/bg15.jpg')" onclick="setTheme(15)">
+<span>🌹 Rose Aesthetic</span>
+</div>
+
+<div class="theme-item" data-theme="16" style="background-image:url('backgrounds/bg16.jpg')" onclick="setTheme(16)">
+<span>☕ Cozy Coffee</span>
+</div>
+
+<div class="theme-item" data-theme="17" style="background-image:url('backgrounds/bg17.jpg')" onclick="setTheme(17)">
+<span>🌅 Sunset</span>
+</div>
+
+<div class="theme-item" data-theme="18" style="background-image:url('backgrounds/bg18.jpg')" onclick="setTheme(18)">
+<span>🌊 Ocean</span>
+</div>
+
+<div class="theme-item" data-theme="19" style="background-image:url('backgrounds/bg19.jpg')" onclick="setTheme(19)">
+<span>🌲 Forest</span>
+</div>
+
+<div class="theme-item" data-theme="20" style="background-image:url('backgrounds/bg20.jpg')" onclick="setTheme(20)">
+<span>🌌 Galaxy</span>
+</div>
+
+</div>
+</section>
 
 
-            <!-- BUNGA 11 -->
-            <div
-                class="theme-item"
-                data-theme="11"
-                style="background-image:url('backgrounds/bg11.jpg')"
-                onclick="setTheme(11)">
-                <span>🌷 Pink Flowers</span>
-            </div>
+<section class="section">
 
-            <!-- BUNGA 12 -->
-            <div
-                class="theme-item"
-                data-theme="12"
-                style="background-image:url('backgrounds/bg12.jpg')"
-                onclick="setTheme(12)">
-                <span>🌸 Sakura Flowers</span>
-            </div>
+<h2>📊 Statistik</h2>
 
-            <!-- BUNGA 13 -->
-            <div
-                class="theme-item"
-                data-theme="13"
-                style="background-image:url('backgrounds/bg13.jpg')"
-                onclick="setTheme(13)">
-                <span>💜 Lavender</span>
-            </div>
+<div class="stats">
 
-            <!-- BUNGA 14 -->
-            <div
-                class="theme-item"
-                data-theme="14"
-                style="background-image:url('backgrounds/bg14.jpg')"
-                onclick="setTheme(14)">
-                <span>🌺 Soft Flowers</span>
-            </div>
+<div class="stat">
+<div class="stat-number" id="totalBooks">0</div>
+<div class="stat-label">Total Buku</div>
+</div>
 
-            <!-- BUNGA 15 -->
-            <div
-                class="theme-item"
-                data-theme="15"
-                style="background-image:url('backgrounds/bg15.jpg')"
-                onclick="setTheme(15)">
-                <span>🌹 Rose Aesthetic</span>
-            </div>
+<div class="stat">
+<div class="stat-number" id="averageRating">0 ⭐</div>
+<div class="stat-label">Rating Rata-rata</div>
+</div>
+
+<div class="stat">
+<div class="stat-number" id="favoriteBook">-</div>
+<div class="stat-label">Favorit</div>
+</div>
+
+</div>
+</section>
 
 
-            <!-- BEBAS 16 -->
-            <div
-                class="theme-item"
-                data-theme="16"
-                style="background-image:url('backgrounds/bg16.jpg')"
-                onclick="setTheme(16)">
-                <span>☕ Cozy Coffee</span>
-            </div>
+<section class="section">
 
-            <!-- BEBAS 17 -->
-            <div
-                class="theme-item"
-                data-theme="17"
-                style="background-image:url('backgrounds/bg17.jpg')"
-                onclick="setTheme(17)">
-                <span>🌅 Sunset</span>
-            </div>
+<h2>➕ Tambah Buku</h2>
 
-            <!-- BEBAS 18 -->
-            <div
-                class="theme-item"
-                data-theme="18"
-                style="background-image:url('backgrounds/bg18.jpg')"
-                onclick="setTheme(18)">
-                <span>🌊 Ocean</span>
-            </div>
+<div class="form-group">
+<label>Judul Buku</label>
+<input id="bookTitle" type="text" placeholder="Contoh: Bicara Itu Ada Seninya">
+</div>
 
-            <!-- BEBAS 19 -->
-            <div
-                class="theme-item"
-                data-theme="19"
-                style="background-image:url('backgrounds/bg19.jpg')"
-                onclick="setTheme(19)">
-                <span>🌲 Forest</span>
-            </div>
+<div class="form-group">
+<label>Penulis</label>
+<input id="bookAuthor" type="text" placeholder="Nama penulis">
+</div>
 
-            <!-- BEBAS 20 -->
-            <div
-                class="theme-item"
-                data-theme="20"
-                style="background-image:url('backgrounds/bg20.jpg')"
-                onclick="setTheme(20)">
-                <span>🌌 Galaxy</span>
-            </div>
+<div class="form-group">
+<label>Genre</label>
+<select id="bookGenre">
+<option value="Self Improvement">Self Improvement</option>
+<option value="Novel">Novel</option>
+<option value="Bisnis">Bisnis</option>
+<option value="Psychology">Psychology</option>
+<option value="Pendidikan">Pendidikan</option>
+<option value="Biografi">Biografi</option>
+<option value="Lainnya">Lainnya</option>
+</select>
+</div>
 
-        </div>
-    </section>
+<div class="form-group">
+<label>Rating</label>
+<select id="bookRating">
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+</select>
+</div>
 
+<div class="form-group">
+<label>Cover Buku</label>
+<input id="bookCover" type="file" accept="image/*">
+</div>
 
-    <!-- TAMBAH BUKU -->
-    <section class="section">
+<div class="form-group">
+<label>Catatan</label>
+<textarea id="bookNote" placeholder="Tulis catatan atau hal yang kamu pelajari..."></textarea>
+</div>
 
-        <h2>➕ Tambah Buku</h2>
+<button class="primary-btn" onclick="addBook()">
+📖 Tambahkan Buku
+</button>
 
-        <div class="form-group">
-            <label>Judul Buku</label>
-
-            <input
-                type="text"
-                id="bookTitle"
-                placeholder="Contoh: Bicara Itu Ada Seninya">
-        </div>
+</section>
 
 
-        <div class="form-group">
-            <label>Penulis</label>
+<section class="section">
 
-            <input
-                type="text"
-                id="bookAuthor"
-                placeholder="Nama penulis">
-        </div>
+<h2>📚 Koleksi Buku</h2>
 
+<div class="tools">
 
-        <div class="form-group">
-            <label>Cover Buku</label>
+<input
+id="searchBook"
+type="text"
+placeholder="🔍 Cari judul, penulis, atau genre..."
+oninput="renderBooks()"
+>
 
-            <input
-                type="file"
-                id="bookCover"
-                accept="image/*">
-        </div>
+<select id="sortBook" onchange="renderBooks()">
+<option value="newest">🆕 Terbaru</option>
+<option value="oldest">📅 Terlama</option>
+<option value="az">🔤 Judul A-Z</option>
+<option value="za">🔤 Judul Z-A</option>
+<option value="rating">⭐ Rating Tertinggi</option>
+</select>
 
+</div>
 
-        <div class="form-group">
-            <label>Catatan</label>
+<div id="bookList" class="book-grid"></div>
 
-            <textarea
-                id="bookNote"
-                placeholder="Tulis catatan atau hal yang kamu pelajari dari buku ini..."></textarea>
-        </div>
-
-
-        <button
-            class="primary-btn"
-            onclick="addBook()">
-            📖 Tambahkan Buku
-        </button>
-
-    </section>
+</section>
 
 
-    <!-- KOLEKSI -->
-    <section class="section">
+<section class="section">
 
-        <h2>📚 Koleksi Buku</h2>
+<h2>💾 Backup Data</h2>
 
-        <div
-            id="bookList"
-            class="book-grid">
-        </div>
+<p>
+Simpan data buku kamu supaya bisa dipindahkan atau dicadangkan.
+</p>
 
-    </section>
+<div class="backup-buttons">
+
+<button class="green-btn" onclick="exportData()">
+⬇️ Backup Data
+</button>
+
+<button class="blue-btn" onclick="document.getElementById('importFile').click()">
+⬆️ Restore Data
+</button>
+
+<input
+id="importFile"
+type="file"
+accept=".json"
+style="display:none"
+onchange="importData(event)"
+>
+
+</div>
+
+</section>
 
 </main>
 
 
 <footer>
-    My Book Notes ❤️
+My Book Notes ❤️
 </footer>
+
+
+<!-- DETAIL MODAL -->
+
+<div class="modal" id="detailModal">
+
+<div class="modal-box">
+
+<button class="modal-close" onclick="closeModal()">×</button>
+
+<div id="detailContent"></div>
+
+</div>
+
+</div>
 
 
 <script>
 
-/* =========================
-   DATA BUKU
-========================= */
-
 let books =
-    JSON.parse(
-        localStorage.getItem("myBookNotesBooks")
-    ) || [];
-
-
-/* =========================
-   NAMA PEMILIK
-========================= */
+JSON.parse(localStorage.getItem("myBookNotesBooks")) || [];
 
 let owner =
-    localStorage.getItem("myBookNotesOwner") || "";
-
-
-/* =========================
-   20 BACKGROUND
-========================= */
+localStorage.getItem("myBookNotesOwner") || "";
 
 const themes = {
-
-    1: "backgrounds/bg01.jpg",
-    2: "backgrounds/bg02.jpg",
-    3: "backgrounds/bg03.jpg",
-    4: "backgrounds/bg04.jpg",
-    5: "backgrounds/bg05.jpg",
-    6: "backgrounds/bg06.jpg",
-    7: "backgrounds/bg07.jpg",
-    8: "backgrounds/bg08.jpg",
-    9: "backgrounds/bg09.jpg",
-    10: "backgrounds/bg10.jpg",
-
-    11: "backgrounds/bg11.jpg",
-    12: "backgrounds/bg12.jpg",
-    13: "backgrounds/bg13.jpg",
-    14: "backgrounds/bg14.jpg",
-    15: "backgrounds/bg15.jpg",
-
-    16: "backgrounds/bg16.jpg",
-    17: "backgrounds/bg17.jpg",
-    18: "backgrounds/bg18.jpg",
-    19: "backgrounds/bg19.jpg",
-    20: "backgrounds/bg20.jpg"
-
+1:"backgrounds/bg01.jpg",
+2:"backgrounds/bg02.jpg",
+3:"backgrounds/bg03.jpg",
+4:"backgrounds/bg04.jpg",
+5:"backgrounds/bg05.jpg",
+6:"backgrounds/bg06.jpg",
+7:"backgrounds/bg07.jpg",
+8:"backgrounds/bg08.jpg",
+9:"backgrounds/bg09.jpg",
+10:"backgrounds/bg10.jpg",
+11:"backgrounds/bg11.jpg",
+12:"backgrounds/bg12.jpg",
+13:"backgrounds/bg13.jpg",
+14:"backgrounds/bg14.jpg",
+15:"backgrounds/bg15.jpg",
+16:"backgrounds/bg16.jpg",
+17:"backgrounds/bg17.jpg",
+18:"backgrounds/bg18.jpg",
+19:"backgrounds/bg19.jpg",
+20:"backgrounds/bg20.jpg"
 };
 
 
-/* =========================
-   LOAD NAMA
-========================= */
-
 document.getElementById("ownerName").value = owner;
 
-if (owner) {
-    document.getElementById("welcomeText").textContent =
-        "Halo, " + owner + "! 👋";
+if(owner){
+document.getElementById("welcomeText").textContent =
+"Halo, " + owner + "! 👋";
 }
 
 
-/* =========================
-   SIMPAN NAMA
-========================= */
+/* NAMA */
 
-function saveName() {
+function saveName(){
 
-    const name =
-        document
-        .getElementById("ownerName")
-        .value
-        .trim();
+const name =
+document.getElementById("ownerName").value.trim();
 
-    if (!name) {
-        alert("Masukkan nama terlebih dahulu.");
-        return;
-    }
-
-    owner = name;
-
-    localStorage.setItem(
-        "myBookNotesOwner",
-        owner
-    );
-
-    document.getElementById("welcomeText").textContent =
-        "Halo, " + owner + "! 👋";
-
-    alert("Nama berhasil disimpan! ❤️");
+if(!name){
+alert("Masukkan nama terlebih dahulu.");
+return;
 }
 
+owner=name;
 
-/* =========================
-   THEME GALLERY
-========================= */
+localStorage.setItem(
+"myBookNotesOwner",
+owner
+);
 
-function toggleThemes() {
-
-    document
-        .getElementById("themeGallery")
-        .classList.toggle("show");
+document.getElementById("welcomeText").textContent =
+"Halo, " + owner + "! 👋";
 
 }
 
 
-/* =========================
-   SET THEME
-========================= */
+/* THEME */
 
-function setTheme(id) {
+function toggleThemes(){
 
-    if (!themes[id]) return;
-
-
-    document.body.style.backgroundImage =
-        "linear-gradient(rgba(0,0,0,.18), rgba(0,0,0,.18)), url('" +
-        themes[id] +
-        "')";
-
-
-    document.body.style.backgroundSize = "cover";
-
-    document.body.style.backgroundPosition =
-        "center";
-
-    document.body.style.backgroundAttachment =
-        "fixed";
-
-
-    localStorage.setItem(
-        "myBookNotesTheme",
-        id
-    );
-
-
-    document
-        .querySelectorAll(".theme-item")
-        .forEach(function(item) {
-
-            item.classList.remove("active");
-
-        });
-
-
-    const selected =
-        document.querySelector(
-            '.theme-item[data-theme="' +
-            id +
-            '"]'
-        );
-
-
-    if (selected) {
-        selected.classList.add("active");
-    }
+document
+.getElementById("themeGallery")
+.classList.toggle("show");
 
 }
 
 
-/* =========================
-   LOAD THEME
-========================= */
+function setTheme(id){
+
+if(!themes[id]) return;
+
+document.body.style.backgroundImage =
+"linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),url('" +
+themes[id] +
+"')";
+
+document.body.style.backgroundSize="cover";
+document.body.style.backgroundPosition="center";
+document.body.style.backgroundAttachment="fixed";
+
+localStorage.setItem(
+"myBookNotesTheme",
+id
+);
+
+document
+.querySelectorAll(".theme-item")
+.forEach(function(item){
+item.classList.remove("active");
+});
+
+const selected =
+document.querySelector(
+'.theme-item[data-theme="' + id + '"]'
+);
+
+if(selected){
+selected.classList.add("active");
+}
+
+}
+
 
 const savedTheme =
-    localStorage.getItem(
-        "myBookNotesTheme"
-    );
+localStorage.getItem("myBookNotesTheme");
+
+if(savedTheme && themes[savedTheme]){
+setTheme(savedTheme);
+}
 
 
-if (
-    savedTheme &&
-    themes[savedTheme]
-) {
+/* DARK MODE */
 
-    setTheme(savedTheme);
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark");
+
+localStorage.setItem(
+"myBookNotesDark",
+document.body.classList.contains("dark")
+);
+
+}
+
+if(localStorage.getItem("myBookNotesDark")==="true"){
+document.body.classList.add("dark");
+}
+
+
+/* ESCAPE */
+
+function escapeHTML(text){
+
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
 }
 
 
-/* =========================
-   TAMBAH BUKU
-========================= */
+/* TAMBAH BUKU */
 
-function addBook() {
+function addBook(){
 
-    const title =
-        document
-        .getElementById("bookTitle")
-        .value
-        .trim();
+const title =
+document.getElementById("bookTitle").value.trim();
 
-    const author =
-        document
-        .getElementById("bookAuthor")
-        .value
-        .trim();
+const author =
+document.getElementById("bookAuthor").value.trim();
 
-    const note =
-        document
-        .getElementById("bookNote")
-        .value
-        .trim();
+const genre =
+document.getElementById("bookGenre").value;
 
-    const coverInput =
-        document.getElementById("bookCover");
+const rating =
+Number(document.getElementById("bookRating").value);
 
+const note =
+document.getElementById("bookNote").value.trim();
 
-    if (!title) {
-        alert("Judul buku belum diisi.");
-        return;
-    }
+const coverInput =
+document.getElementById("bookCover");
 
+if(!title){
+alert("Judul buku belum diisi.");
+return;
+}
 
-    if (!author) {
-        alert("Penulis belum diisi.");
-        return;
-    }
+if(!author){
+alert("Penulis belum diisi.");
+return;
+}
 
+if(!note){
+alert("Catatan belum diisi.");
+return;
+}
 
-    if (!note) {
-        alert("Catatan belum diisi.");
-        return;
-    }
+if(!coverInput.files || !coverInput.files[0]){
+alert("Pilih cover buku terlebih dahulu.");
+return;
+}
 
+const reader = new FileReader();
 
-    if (
-        !coverInput.files ||
-        !coverInput.files[0]
-    ) {
+reader.onload=function(e){
 
-        alert("Pilih cover buku terlebih dahulu.");
-        return;
+const book={
 
-    }
+id:Date.now(),
 
+title:title,
 
-    const file =
-        coverInput.files[0];
+author:author,
 
+genre:genre,
 
-    const reader =
-        new FileReader();
+rating:rating,
 
+note:note,
 
-    reader.onload = function(e) {
+cover:e.target.result,
 
-        const book = {
+createdAt:Date.now()
 
-            id: Date.now(),
+};
 
-            title: title,
+books.push(book);
 
-            author: author,
+saveBooks();
 
-            note: note,
+clearForm();
 
-            cover: e.target.result
+renderBooks();
 
-        };
+alert("Buku berhasil ditambahkan! 📚");
 
+};
 
-        books.push(book);
-
-
-        localStorage.setItem(
-            "myBookNotesBooks",
-            JSON.stringify(books)
-        );
-
-
-        document.getElementById(
-            "bookTitle"
-        ).value = "";
-
-
-        document.getElementById(
-            "bookAuthor"
-        ).value = "";
-
-
-        document.getElementById(
-            "bookNote"
-        ).value = "";
-
-
-        document.getElementById(
-            "bookCover"
-        ).value = "";
-
-
-        renderBooks();
-
-
-        alert("Buku berhasil ditambahkan! 📚");
-
-    };
-
-
-    reader.readAsDataURL(file);
+reader.readAsDataURL(
+coverInput.files[0]
+);
 
 }
 
 
-/* =========================
-   HAPUS BUKU
-========================= */
+/* SIMPAN */
 
-function deleteBook(id) {
+function saveBooks(){
 
-    const confirmDelete =
-        confirm(
-            "Yakin ingin menghapus buku ini?"
-        );
-
-
-    if (!confirmDelete) return;
-
-
-    books =
-        books.filter(
-            function(book) {
-
-                return book.id !== id;
-
-            }
-        );
-
-
-    localStorage.setItem(
-        "myBookNotesBooks",
-        JSON.stringify(books)
-    );
-
-
-    renderBooks();
+localStorage.setItem(
+"myBookNotesBooks",
+JSON.stringify(books)
+);
 
 }
 
 
-/* =========================
-   ESCAPE HTML
-========================= */
+/* CLEAR FORM */
 
-function escapeHTML(text) {
+function clearForm(){
 
-    return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+document.getElementById("bookTitle").value="";
+document.getElementById("bookAuthor").value="";
+document.getElementById("bookNote").value="";
+document.getElementById("bookCover").value="";
 
 }
 
 
-/* =========================
-   RENDER BUKU
-========================= */
+/* RATING */
 
-function renderBooks() {
+function stars(rating){
 
-    const bookList =
-        document.getElementById(
-            "bookList"
-        );
-
-
-    if (books.length === 0) {
-
-        bookList.innerHTML = `
-            <div class="empty">
-                📚 Belum ada buku.<br>
-                Tambahkan buku pertamamu!
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    bookList.innerHTML =
-        books.map(
-            function(book) {
-
-                return `
-
-                <div class="card">
-
-                    <img
-                        class="card-cover"
-                        src="${book.cover}"
-                        alt="Cover ${escapeHTML(book.title)}"
-                    >
-
-                    <div class="card-content">
-
-                        <div class="card-title">
-                            ${escapeHTML(book.title)}
-                        </div>
-
-                        <div class="card-author">
-                            ✍️ ${escapeHTML(book.author)}
-                        </div>
-
-                        <div class="card-note">
-                            ${escapeHTML(book.note)}
-                        </div>
-
-                        <div class="card-footer">
-
-                            <button
-                                class="delete-btn"
-                                onclick="deleteBook(${book.id})">
-
-                                🗑️ Hapus
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                `;
-
-            }
-        ).join("");
+return "⭐".repeat(Number(rating));
 
 }
 
 
-/* =========================
-   START
-========================= */
+/* RENDER */
+
+function renderBooks(){
+
+const bookList =
+document.getElementById("bookList");
+
+const search =
+document.getElementById("searchBook")
+.value
+.toLowerCase()
+.trim();
+
+const sort =
+document.getElementById("sortBook")
+.value;
+
+
+let filtered =
+books.filter(function(book){
+
+return (
+
+book.title.toLowerCase().includes(search) ||
+
+book.author.toLowerCase().includes(search) ||
+
+book.genre.toLowerCase().includes(search)
+
+);
+
+});
+
+
+if(sort==="newest"){
+filtered.sort((a,b)=>b.createdAt-a.createdAt);
+}
+
+if(sort==="oldest"){
+filtered.sort((a,b)=>a.createdAt-b.createdAt);
+}
+
+if(sort==="az"){
+filtered.sort((a,b)=>
+a.title.localeCompare(b.title)
+);
+}
+
+if(sort==="za"){
+filtered.sort((a,b)=>
+b.title.localeCompare(a.title)
+);
+}
+
+if(sort==="rating"){
+filtered.sort((a,b)=>
+b.rating-a.rating
+);
+}
+
+
+if(filtered.length===0){
+
+bookList.innerHTML=`
+
+<div class="empty">
+
+📚 Tidak ada buku ditemukan.
+
+</div>
+
+`;
+
+updateStats();
+
+return;
+
+}
+
+
+bookList.innerHTML =
+filtered.map(function(book){
+
+return `
+
+<div class="card">
+
+<img
+class="card-cover"
+src="${book.cover}"
+alt="Cover buku"
+>
+
+<div class="card-content">
+
+<div class="card-title">
+${escapeHTML(book.title)}
+</div>
+
+<div class="card-author">
+✍️ ${escapeHTML(book.author)}
+</div>
+
+<div class="genre">
+🏷️ ${escapeHTML(book.genre)}
+</div>
+
+<div class="rating">
+${stars(book.rating)}
+</div>
+
+<div class="card-note">
+${escapeHTML(book.note)}
+</div>
+
+<div class="card-footer">
+
+<button
+class="blue-btn"
+onclick="showDetail(${book.id})">
+📖 Detail
+</button>
+
+<button
+class="edit-btn"
+onclick="editBook(${book.id})">
+✏️ Edit
+</button>
+
+<button
+class="delete-btn"
+onclick="deleteBook(${book.id})">
+🗑️ Hapus
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+updateStats();
+
+}
+
+
+/* DETAIL */
+
+function showDetail(id){
+
+const book =
+books.find(function(item){
+return item.id===id;
+});
+
+if(!book) return;
+
+document.getElementById("detailContent").innerHTML=`
+
+<img
+class="detail-cover"
+src="${book.cover}"
+alt="Cover buku"
+>
+
+<h2>${escapeHTML(book.title)}</h2>
+
+<p>
+<strong>✍️ Penulis:</strong>
+${escapeHTML(book.author)}
+</p>
+
+<p>
+<strong>🏷️ Genre:</strong>
+${escapeHTML(book.genre)}
+</p>
+
+<p>
+<strong>⭐ Rating:</strong>
+${stars(book.rating)}
+</p>
+
+<hr>
+
+<h3>📝 Catatan</h3>
+
+<div class="detail-note">
+${escapeHTML(book.note)}
+</div>
+
+`;
+
+document
+.getElementById("detailModal")
+.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document
+.getElementById("detailModal")
+.classList.remove("show");
+
+}
+
+
+/* EDIT */
+
+function editBook(id){
+
+const book =
+books.find(function(item){
+return item.id===id;
+});
+
+if(!book) return;
+
+const newTitle =
+prompt("Judul buku:",book.title);
+
+if(newTitle===null) return;
+
+const newAuthor =
+prompt("Penulis:",book.author);
+
+if(newAuthor===null) return;
+
+const newGenre =
+prompt(
+"Genre:",
+book.genre
+);
+
+if(newGenre===null) return;
+
+const newNote =
+prompt(
+"Catatan:",
+book.note
+);
+
+if(newNote===null) return;
+
+const newRating =
+prompt(
+"Rating 1-5:",
+book.rating
+);
+
+if(newRating===null) return;
+
+book.title=newTitle.trim() || book.title;
+
+book.author=newAuthor.trim() || book.author;
+
+book.genre=newGenre.trim() || book.genre;
+
+book.note=newNote.trim() || book.note;
+
+let r=parseInt(newRating);
+
+if(r>=1 && r<=5){
+book.rating=r;
+}
+
+saveBooks();
+
+renderBooks();
+
+alert("Buku berhasil diedit! ✏️");
+
+}
+
+
+/* DELETE */
+
+function deleteBook(id){
+
+const confirmDelete =
+confirm(
+"Yakin ingin menghapus buku ini?"
+);
+
+if(!confirmDelete) return;
+
+books =
+books.filter(function(book){
+return book.id!==id;
+});
+
+saveBooks();
+
+renderBooks();
+
+}
+
+
+/* STATISTIK */
+
+function updateStats(){
+
+document.getElementById(
+"totalBooks"
+).textContent=books.length;
+
+if(books.length===0){
+
+document.getElementById(
+"averageRating"
+).textContent="0 ⭐";
+
+document.getElementById(
+"favoriteBook"
+).textContent="-";
+
+return;
+
+}
+
+const totalRating =
+books.reduce(
+(sum,book)=>sum+Number(book.rating||0),
+0
+);
+
+const average =
+(totalRating/books.length).toFixed(1);
+
+document.getElementById(
+"averageRating"
+).textContent=
+average + " ⭐";
+
+const favorite =
+[...books].sort(
+(a,b)=>b.rating-a.rating
+)[0];
+
+let favTitle=favorite.title;
+
+if(favTitle.length>18){
+favTitle=favTitle.substring(0,18)+"...";
+}
+
+document.getElementById(
+"favoriteBook"
+).textContent=favTitle;
+
+}
+
+
+/* BACKUP */
+
+function exportData(){
+
+const data={
+owner:owner,
+books:books,
+theme:localStorage.getItem("myBookNotesTheme"),
+dark:localStorage.getItem("myBookNotesDark")
+};
+
+const blob =
+new Blob(
+[JSON.stringify(data,null,2)],
+{type:"application/json"}
+);
+
+const url =
+URL.createObjectURL(blob);
+
+const a =
+document.createElement("a");
+
+a.href=url;
+
+a.download="my-book-notes-backup.json";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+}
+
+
+/* RESTORE */
+
+function importData(event){
+
+const file =
+event.target.files[0];
+
+if(!file) return;
+
+const reader =
+new FileReader();
+
+reader.onload=function(e){
+
+try{
+
+const data =
+JSON.parse(e.target.result);
+
+if(data.books){
+books=data.books;
+}
+
+if(data.owner){
+owner=data.owner;
+
+localStorage.setItem(
+"myBookNotesOwner",
+owner
+);
+
+document.getElementById(
+"ownerName"
+).value=owner;
+
+document.getElementById(
+"welcomeText"
+).textContent=
+"Halo, " + owner + "! 👋";
+}
+
+if(data.theme){
+localStorage.setItem(
+"myBookNotesTheme",
+data.theme
+);
+
+setTheme(data.theme);
+}
+
+if(data.dark==="true"){
+localStorage.setItem(
+"myBookNotesDark",
+"true"
+);
+
+document.body.classList.add("dark");
+}
+
+saveBooks();
+
+renderBooks();
+
+alert("Data berhasil dipulihkan! 🎉");
+
+}catch(error){
+
+alert(
+"File backup tidak valid."
+);
+
+}
+
+};
+
+reader.readAsText(file);
+
+}
+
+
+/* START */
 
 renderBooks();
 
